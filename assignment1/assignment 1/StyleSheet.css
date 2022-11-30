@@ -1,0 +1,57 @@
+﻿
+body {
+    background-color: beige;
+}
+
+#buttons {
+    text-align: center;
+}
+
+h1 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-family: Calibri;
+    font-size: 50px;
+}
+
+img {
+    width: 100%;
+}
+
+.ing {
+    border: 1px solid black;
+    text-align: center;
+}
+
+p.ing {
+    font-weight: bold;
+}
+
+.button {
+    text-align: center;
+    margin: 5px;
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+input {
+    margin-bottom: 20px;
+}
+
+.dsh {
+    border: 1px solid black;
+    text-align: center;
+}
+
+#dish_details img {
+    width: 50%;
+}
+
