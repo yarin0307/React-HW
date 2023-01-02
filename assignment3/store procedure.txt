@@ -1,0 +1,172 @@
+store procedure 1
+
+USE [igroup149_test2]
+GO
+/****** Object:  StoredProcedure [dbo].[spInsertIngredient]    Script Date: 02/01/2023 12:50:25 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<yarind anino>
+-- Create date: <28/12/2022>
+-- Description:	<insert ingredient to ingredients table>
+-- =============================================
+ALTER PROCEDURE [dbo].[spInsertIngredient]
+	-- Add the parameters for the stored procedure here
+	   @name nvarchar (30),
+       @image nvarchar (1000),
+	   @calories float
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+
+    -- Insert statements for procedure here
+	INSERT INTO Ingredients ([name],[image],[calories])
+	VALUES (@name,@image,@calories)
+	END
+
+
+store procedure 2
+
+USE [igroup149_test2]
+GO
+/****** Object:  StoredProcedure [dbo].[spInsertIngredientOfRecipe]    Script Date: 02/01/2023 12:50:48 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<yarin danino>
+-- Create date: <29/12/2022>
+-- Description:	<insert ingredint of recipe to the ingredientsInRecipe table>
+-- =============================================
+ALTER PROCEDURE [dbo].[spInsertIngredientOfRecipe]
+	-- Add the parameters for the stored procedure here
+		@recipeId smallint,
+		@ingredientId smallint 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+
+    -- Insert statements for procedure here
+	INSERT INTO [IngredientsInRecipes ]([recipeId],[ingredientId])
+	VALUES (@recipeId,@ingredientId)
+
+END
+
+store procedure 3
+
+USE [igroup149_test2]
+GO
+/****** Object:  StoredProcedure [dbo].[spInsertRecepie]    Script Date: 02/01/2023 12:50:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<yarin danino>
+-- Create date: <28/12/2022>
+-- Description:	<insert recepie to recepies table>
+-- =============================================
+ALTER PROCEDURE [dbo].[spInsertRecepie]
+	-- Add the parameters for the stored procedure here
+        @name nvarchar (30),
+        @image nvarchar (1000),
+		@cookingMethod nvarchar (30),
+		@time float
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+
+    -- Insert statements for procedure here
+		INSERT INTO Recepies([name],[image],[cookingMethod],[time])
+		VALUES (@name,@image,@cookingMethod,@time)
+		select SCOPE_IDENTITY()
+END
+
+store procedure 4
+
+USE [igroup149_test2]
+GO
+/****** Object:  StoredProcedure [dbo].[spSelectIngOfRecipe]    Script Date: 02/01/2023 12:51:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<yarin danino>
+-- Create date: <29/12/2022>
+-- Description:	<select the ingrediens of specific recipe>
+-- =============================================
+ALTER PROCEDURE [dbo].[spSelectIngOfRecipe]
+	-- Add the parameters for the stored procedure here
+	@recipeId smallint
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+
+    -- Insert statements for procedure here
+	SELECT t1.id, t1.name, t1.image,t1.calories
+	from [IngredientsInRecipes ] as t0 inner join Ingredients as t1 on t0.ingredientId=t1.id
+	where recipeId=@recipeId
+END
+
+store procedure 5
+
+USE [igroup149_test2]
+GO
+/****** Object:  StoredProcedure [dbo].[spSelectIngredient]    Script Date: 02/01/2023 12:51:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<yarin danino>
+-- Create date: <28/12/2022>
+-- Description:	<select all ingredients>
+-- =============================================
+ALTER PROCEDURE [dbo].[spSelectIngredient]
+	-- Add the parameters for the stored procedure here
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+
+    -- Insert statements for procedure here
+	SELECT *
+	from Ingredients
+END
+
+
+store procedure 6
+
+USE [igroup149_test2]
+GO
+/****** Object:  StoredProcedure [dbo].[spSelectRecepie]    Script Date: 02/01/2023 12:52:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<yarin danino>
+-- Create date: <28/12/2022>
+-- Description:	<select all recepies>
+-- =============================================
+ALTER PROCEDURE [dbo].[spSelectRecepie]
+	-- Add the parameters for the stored procedure here
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+
+    -- Insert statements for procedure here
+	SELECT *
+	from Recepies
+END
